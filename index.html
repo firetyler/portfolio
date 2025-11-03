@@ -1,63 +1,111 @@
 <!DOCTYPE html>
 <html lang="sv">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Repositories</title>
+  <title>My Portfolio</title>
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Egen CSS -->
   <link rel="stylesheet" href="styles.css">
 </head>
-<body>
-  <div class="repo-section">
-    <h2>GitHub Repositories</h2>
-    <ul id="github-repos" class="repo-list"></ul>
 
-    <h3>Other GitHub Projects</h3>
-    <ul class="repo-list">
-      <li><a href="https://github.com/Sjoblompwr/ProjektOOP2" target="_blank">ProjektOOP2</a></li>
-    </ul>
-
-    <h2>GitLab Repositories</h2>
-    <ul id="gitlab-repos" class="repo-list"></ul>
-
-    <h3>Other GitLab Projects</h3>
-    <ul class="repo-list">
-      <li><a href="https://gitlab.com/albinjerkers/advwebbprojekt" target="_blank">advwebbprojekt</a></li>
-      <li><a href="https://gitlab.com/christofferjansson/projektarbete-programvaruteknik" target="_blank">projektarbete-programvaruteknik</a></li>
-      <li><a href="https://gitlab.com/firetyler110/workspace" target="_blank">workspace</a></li>
-    </ul>
+<body class="bg-light">
+  <div>
+    <h1 class="text-center my-4">My Portfolio</h1>
+    <h2 class="mb-3">GitHub Repositories</h2>
+    <div id="github-repos" class="row g-3 mb-4"> </div>
+    <h3 class="mb-3">Other Github Projects</h3>
+    <div class="row g-3 mb.5">
+      <div class="col-md-4">
+        <div class="card shadow-sm h-100">
+          <div class="card-body">
+            <a href="https://github.com/Sjoblompwr/ProjektOOP2" target="_blank" class="card-link">ProjektOOP2</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--Gitlab repos-->
+    <h2 class="mb-3">GitLab Repositories</h2>
+    <div id="gitlab-repos" class="row g-3 mb-4"></div>
+    <h3 class="mt-4">Other GitLab Projects</h3>
+    <div class="row g-3">
+      <div class="col-md-4">
+        <div class="card shadow-sm h-100">
+          <div class="card-body">
+            <a href="https://gitlab.com/albinjerkers/advwebbprojekt" target="_blank"
+              class="card-link">advwebbprojekt</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card shadow-sm h-100">
+          <div class="card-body">
+            <a href="https://gitlab.com/christofferjansson/projektarbete-programvaruteknik" target="_blank"
+              class="card-link">projektarbete-programvaruteknik</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card shadow-sm h-100">
+          <div class="card-body">
+            <a href="https://gitlab.com/firetyler110/workspace" target="_blank" class="card-link">workspace</a>
+          </div>
+        </div>     
+      </div>
+    </div>
   </div>
+  <!-- Bootstrap JS (valfritt) -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
+  <!-- JS för att hämta repos -->
   <script>
     const githubUser = "firetyler";
     const gitlabUser = "firetyler110";
 
-    // Fetch GitHub repos
+    // GitHub repos
     fetch(`https://api.github.com/users/${githubUser}/repos?sort=updated`)
       .then(res => res.json())
       .then(data => {
-        const list = document.getElementById("github-repos");
-        list.innerHTML = "";
+        const container = document.getElementById("github-repos");
         data.forEach(repo => {
-          const item = document.createElement("li");
-          item.innerHTML = `<a href="${repo.html_url}" target="_blank">${repo.name}</a>`;
-          list.appendChild(item);
+          const col = document.createElement("div");
+          col.className = "col-md-4";
+          col.innerHTML = `
+            <div class="card shadow-sm h-100">
+              <div class="card-body">
+                <a href="${repo.html_url}" target="_blank" class="card-link">${repo.name}</a>
+              </div>
+            </div>
+          `;
+          container.appendChild(col);
         });
       });
 
-    // Fetch GitLab repos
+    // GitLab repos
     fetch(`https://gitlab.com/api/v4/users?username=${gitlabUser}`)
       .then(res => res.json())
       .then(user => fetch(`https://gitlab.com/api/v4/users/${user[0].id}/projects?order_by=last_activity_at`))
       .then(res => res.json())
       .then(data => {
-        const list = document.getElementById("gitlab-repos");
-        list.innerHTML = "";
+        const container = document.getElementById("gitlab-repos");
         data.forEach(repo => {
-          const item = document.createElement("li");
-          item.innerHTML = `<a href="${repo.web_url}" target="_blank">${repo.name}</a>`;
-          list.appendChild(item);
+          const col = document.createElement("div");
+          col.className = "col-md-4";
+          col.innerHTML = `
+            <div class="card shadow-sm h-100">
+              <div class="card-body">
+                <a href="${repo.web_url}" target="_blank" class="card-link">${repo.name}</a>
+              </div>
+            </div>
+          `;
+          container.appendChild(col);
         });
       });
   </script>
+
 </body>
+
 </html>
