@@ -1,0 +1,40 @@
+<div>
+  <h2>GitHub Repositories</h2>
+  <ul id="github-repos"></ul>
+
+  <h2>GitLab Repositories</h2>
+  <ul id="gitlab-repos"></ul>
+</div>
+
+<script>
+const githubUser = "firetyler";
+const gitlabUser = "firetyler110";
+
+// Fetch GitHub repos
+fetch(`https://api.github.com/users/${githubUser}/repos?sort=updated`)
+  .then(res => res.json())
+  .then(data => {
+    let list = document.getElementById("github-repos");
+    list.innerHTML = ""; // clear old list
+    data.forEach(repo => {
+      let item = document.createElement("li");
+      item.innerHTML = `<a href="${repo.html_url}" target="_blank">${repo.name}</a>`;
+      list.appendChild(item);
+    });
+  });
+
+// Fetch GitLab repos
+fetch(`https://gitlab.com/api/v4/users?username=${gitlabUser}`)
+  .then(res => res.json())
+  .then(user => fetch(`https://gitlab.com/api/v4/users/${user[0].id}/projects?order_by=last_activity_at`))
+  .then(res => res.json())
+  .then(data => {
+    let list = document.getElementById("gitlab-repos");
+    list.innerHTML = ""; // clear old list
+    data.forEach(repo => {
+      let item = document.createElement("li");
+      item.innerHTML = `<a href="${repo.web_url}" target="_blank">${repo.name}</a>`;
+      list.appendChild(item);
+    });
+  });
+</script>
