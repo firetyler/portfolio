@@ -2,8 +2,22 @@
   <h2>GitHub Repositories</h2>
   <ul id="github-repos"></ul>
 
+  <!-- Manually added GitHub repos -->
+  <h3>Other GitHub Projects</h3>
+  <ul>
+    <li><a href="https://github.com/Sjoblompwr/ProjektOOP2" target="_blank">ProjektOOP2</a></li>
+  </ul>
+
   <h2>GitLab Repositories</h2>
   <ul id="gitlab-repos"></ul>
+
+  <!-- Manually added GitLab repos -->
+  <h3>Other GitLab Projects</h3>
+  <ul>
+    <li><a href="https://gitlab.com/albinjerkers/advwebbprojekt" target="_blank">advwebbprojekt</a></li>
+    <li><a href="https://gitlab.com/christofferjansson/projektarbete-programvaruteknik" target="_blank">projektarbete-programvaruteknik</a></li>
+    <li><a href="https://gitlab.com/firetyler110/workspace" target="_blank">workspace</a></li>
+  </ul>
 </div>
 
 <script>
@@ -30,7 +44,7 @@ fetch(`https://gitlab.com/api/v4/users?username=${gitlabUser}`)
   .then(res => res.json())
   .then(data => {
     let list = document.getElementById("gitlab-repos");
-    list.innerHTML = ""; // clear old list
+    list.innerHTML = ""; // clear
     data.forEach(repo => {
       let item = document.createElement("li");
       item.innerHTML = `<a href="${repo.web_url}" target="_blank">${repo.name}</a>`;
