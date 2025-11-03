@@ -12,7 +12,15 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 
-<body class="bg-light">
+<body class="bg-light d-flex flex-column min-vh-100">
+   <!-- HEADER -->
+  <header class="bg-dark text-white py-4 mb-5">
+    <div class="container text-center">
+      <h1 class="display-4">My Portfolio</h1>
+      <p class="lead">GitHub & GitLab Repositories</p>
+    </div>
+  </header>
+   <main class="container flex-grow-1">
   <div>
     <h1 class="text-center my-4">My Portfolio</h1>
     <h2 class="mb-3">GitHub Repositories</h2>
@@ -57,6 +65,17 @@
       </div>
     </div>
   </div>
+  </main>
+    <!-- FOOTER -->
+  <footer class="bg-dark text-white py-4 mt-auto">
+    <div class="container text-center">
+      <p class="mb-1">&copy; 2025 My Portfolio</p>
+      <p>
+        <a href="https://github.com/firetyler" target="_blank" class="text-white text-decoration-none me-3">GitHub</a>
+        <a href="https://gitlab.com/firetyler110" target="_blank" class="text-white text-decoration-none">GitLab</a>
+      </p>
+    </div>
+  </footer>
   <!-- Bootstrap JS (valfritt) -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
